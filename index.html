@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="play_logo.jpg">
+    <link rel="stylesheet" href="index.css">
+    <script type="module" src="index.js" defer></script>
+    <script type="module" src="firebase.js" defer></script>
+    <script src="https://unpkg.com/youtube-video-id@latest/dist/youtube-video-id.min.js"></script>
+    <title>Top 10 Lowkeys | Top 10 ten songs you have not listened to in Kenya.</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="title">
+            <img src="Untitled design.jpg" alt="logo">
+            <div class="intro">
+            <h1>Top 10 Lowkeys</h1>
+            <h3>Home of music discovery</h3>
+        </div>
+        </div>
+        <div class="navs">
+            <ul>
+                <li>Home</li>
+                <li id="suggest">Suggest to us</li>
+                <li id="menu">Menu</li>
+            </ul>
+
+            <li><svg id="hamburger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+              </svg></li>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="preamble">
+            <h3>About Top 10 Lowkeys</h3>
+        <p>Hello, Welcome to top 10 lowkeys... Here
+            we discover new music from artists who are not 
+            often heard from, lets give them a chance!
+        </p>
+    </div>
+    <h2>This Week's Top Ten</h2>
+        <div class="featured">
+            <div class="feature-container" id="featured">
+                <div class="card default" id="default-featured">
+                    <h4>Oops! No videos yet...</h4>
+                </div>
+                </div>
+            </div>
+        </div>
+        <h2>Hottest</h2>
+        <div class="thisweek">
+            <div class="topten" id="topten">
+                <div class="default card">
+                    <h4>Oops! No videos yet...</h4>
+                </div>
+            </div>
+        </div>
+        <h2>Archives</h2>
+        <div class="archived">
+
+            <div class="archives" id="archives">
+                <div class="default card" id="default-archives">
+                    <h4>Oops! No videos yet...</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidenav" id="sidenav">
+        <h2>Suggest to Us</h2>
+        <form id="suggestionForm" action="">
+            <label for="artistName">Artist</label>
+            <input type="text" id="artistName" name="artistname">
+            <label for="title">Song Title</label>
+            <input type="text" id="title" name="title">
+            <label for="link">Link</label>
+            <input type="text" placeholder="input youtube song link" id="youtubeURL">
+            <button id="sendrequest">Suggest</button>
+        </form>
+
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="#">Back to Top</a></li>
+            <li><a href="#">This Week</a></li>
+            <li><a href="#">Archives</a></li>
+        </ul>
+
+        <h2>Contacts</h2>
+        <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">TikTok</a></li>
+        </ul>
+    </div>
+
+    <div class="player" id="player-container">
+        <div class="closer">
+        <svg id="close-player" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </div>
+        <div class="iframe">
+        <iframe id="youtube-player" title="YouTube video player" width="300" height="200"  frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <svg id="controller" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+        <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"/>
+      </svg>
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+*{
+    font-family: "Abel", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow-x: hidden;
+    background: rgb(136, 136, 136);
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+li{
+    list-style-type: none;
+}
+
+h2{
+    color: white;
+    margin-inline: 12px;
+}
+
+.navbar{
+    display: flex;
+    background: linear-gradient(rgba(0, 0, 0, 0.626), rgba(0, 0, 0, 0));
+    color: white;
+    justify-content: space-between;
+    align-items: start;
+    height: 200px;
+    width: 100vw;
+    position: fixed;
+    top: 0;  
+    z-index: 998;
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: white;
+    margin: 1px;
+}
+
+.topten::-webkit-scrollbar, .feature-container::-webkit-scrollbar, .archives::-webkit-scrollbar{
+    height: 6px;
+    margin: 12px;
+}
+
+.topten::-webkit-scrollbar-thumb, .feature-container::-webkit-scrollbar-thumb, .archives::-webkit-scrollbar-thumb{
+    margin: 1px;
+    border-radius: 4px;
+}
+
+.navs{
+    display: flex;
+    margin: 12px;
+}
+
+.navs svg{
+    display: none;
+}
+
+.navbar li{
+    float: left;
+    margin-inline: 12px;  
+    cursor: pointer;  
+}
+
+.title{
+    margin: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.title h1{
+    font-size: 3rem;
+}
+
+.title img{
+    align-self: center;
+    height: 100px;
+    width: 100px;
+}
+
+.intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-inline: 12px;
+}
+
+.sidenav{
+    position: fixed;
+    top: 0;
+    left: -300px;
+    opacity: 0;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.844);
+    transition: .6s;
+    z-index: 999;
+}
+
+.sidenavOpen{
+    opacity: 1;
+    left: 0;
+}
+
+.sidenav h2, .sidenav li{
+    margin: 10px;
+}
+
+.sidenav form{
+    border: 1px solid white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 4px;
+}
+
+.sidenav form label, 
+.sidenav form input, 
+.sidenav form button{
+    margin: 8px;
+}
+
+.sidenav form input{
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.sidenav form button{
+    background: rgb(122, 122, 122);
+    border: none;
+    color: white;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .6s;
+}
+
+.sidenav form button:hover{
+    color: black;
+    background: white;
+}
+
+.indicator{
+    animation: indicator 2s 5;
+}
+
+
+
+@keyframes indicator{
+    0%,100%{
+        border: 1px solid transparent;
+    }
+    50%{
+        border: 1px solid white;
+    }
+}
+
+
+.card{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 300px;
+    cursor: pointer;
+    background: rgb(181, 181, 181);
+    border-radius: 8px;
+    margin-inline: 12px;
+    overflow: hidden;
+}
+
+.card h4{
+    background: rgba(0, 0, 0, 0.727);
+    position: absolute;
+    bottom: 0;
+    padding: 8px;
+    z-index: 997;
+}
+
+.card .like-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 995;
+    display: flex;
+}
+
+.card i, .card p{
+    margin: 6px;
+}
+
+.default h4{
+    position: static;
+    background: none;
+}
+
+.card::after{
+    content: '';
+    position: absolute;
+    height: 250px;
+    width: 300px;
+    background: url(play_logo_undone.jpg);
+    background-position: center;
+    background-size: contain;
+    opacity: 0;
+    border-radius: 8px;
+    transition: .6s;
+    margin-inline: 12px;
+}
+
+.card:hover::after{
+    opacity: 60%;
+}
+
+
+
+.featured, .archived, .thisweek{
+    margin: 12px;
+    display: flex;
+    height: 300px;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.395);
+    color: white;
+    border-radius: 8px;
+}
+
+.topten, .archives, .feature-container{
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+}
+.preamble{
+    margin: 12px;
+    color: white;
+    border-radius: 0px;
+    border: none;
+    border-top: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: .6s;
+    cursor: pointer;
+    margin-top: 200px;
+}
+
+.preamble:hover{
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.preamble:hover p{
+    opacity: 1;
+}
+
+.preamble h3, .preamble p{
+    margin: 8px;
+
+}
+
+.preamble p{
+    opacity: 0;
+    transition: .6s;
+
+}
+
+.preamble h3{
+    cursor: pointer;
+    position: absolute;
+    top: -18px;
+    left: 12px;
+    background: rgb(136, 136, 136);
+    padding: 4px;
+    text-align: center;
+    line-height: .5;
+}
+
+.player{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 998;
+    margin: 12px;
+    border-radius: 8px;
+}
+
+.player iframe{
+    border-radius: 8px;
+}
+
+#close-player{
+    background: white;
+    padding: 8px;
+    border-radius: 100px;
+    z-index: 998;
+    cursor: pointer;
+}
+
+#controller{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 4px;
+    background: white;
+    padding: 12px;
+    border-radius: 100px;
+    box-shadow: 0 0 1rem .5rem rgba(0, 0, 0, 0.203);
+}
+@media screen and (max-width: 600px){
+
+    .navbar{  
+        width: 100vw;
+        height: 100px;  
+        position: fixed;
+        top: 0;  
+        z-index: 999;
+    }
+
+    .navbar h1, .navbar h3{
+        font-size: .8rem;
+    }
+
+    .navs{
+        margin: 0;
+        margin-block: 12px;
+    }
+
+    .navbar img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .navs ul{
+        display: none;
+    }
+
+    .navs svg{
+        display: flex;
+        height: 30px;
+        width: 30px;
+        margin: 4px;
+    }
+
+
+    .preamble{
+        margin-top: 100px;
+        border-radius: 4px;
+        border: none;
+        border: 1px solid white;
+    }
+
+    .preamble p{
+        opacity: 1;
+    }
+
+    .sidenav{
+        width: 200px;
+        background: rgba(0, 0, 0, 0.963);
+        height: 100vh;
+    }
+    .card{
+        height: 150px;
+        width: 230px;
+    }
+
+    .card::after{
+        height: 150px;
+        width: 230px;
+    }
+
+    .featured, .archived, .thisweek{
+        margin: 4px;
+        display: grid;
+        height: 250px;
+        grid-auto-flow: row;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.395);
+        color: white;
+        border-radius: 8px;
+    }
+
+    .player{
+        position: fixed;
+        display: none;
+        z-index: 997;
+        margin-right: 0;
+        flex-direction: column;
+        scale: 90%;
+    }
+
+    .closer{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .iframe{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .player iframe{
+        border-radius: 8px;
+        z-index: 999;
+        margin-left: 4px;
+        transform: scale(85%);
+    }
+
+    #close-player{
+        transform: scale(85%);
+    }
+
+
+
+}

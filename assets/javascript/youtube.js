@@ -9,14 +9,14 @@ class Youtube{
     async getPlaylist(){
         const response = await fetch(this.apiKey);
         const videos = await response.json();
-        return videos;
+        return await videos;
     }
 
     async prepareInfo(){
         const playlistObject = await this.getPlaylist();
         const result = [];
     
-        for (const item of playlistObject.items) {
+        for (const item of await playlistObject.items) {
             const title = item.snippet.title;
             const thumbnailUrl = item.snippet.thumbnails.high.url;
             const videoID = item.snippet.resourceId.videoId;

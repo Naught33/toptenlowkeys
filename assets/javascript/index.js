@@ -1,6 +1,9 @@
+//imports section
+
 import Youtube from "./youtube.js";
 import FirebaseImplementation from "./firebase.js";
 
+//grabbing DOM elements
 const menuButton = document.getElementById('menu');
 const sidenav = document.getElementById('sidenav');
 const suggestButton = document.getElementById('suggest');
@@ -20,12 +23,42 @@ let toggleTracker = false;
 
 
 
-
-
+//class instantiations
 const playlist = new Youtube();
 const firebase = new FirebaseImplementation();
 
 
+
+//functions
+
+//function to check if user is signed in on load of the document
+function checkLogInStatus(){
+    //implement
+}
+
+//prompt the user to sign up or sign in if not signed in, this function will be called inside the checkLogInStatus();
+function promptLogInSignUp(){
+    //implement
+}
+
+//the following functions are a set of functions to sign up, log in or log out user
+
+function logIn(){
+    //implement
+}
+
+function logOut(){
+    //implement
+}
+
+function signUp(){
+    //implement
+}
+
+//lastly in the sign in suite of functions, we will add a validation function for the credentials.
+function validate(){
+    //imlement
+}
 
 async function populateArchives(){
 firebase.getVideoURLs().then((urls) => {
@@ -135,6 +168,9 @@ function highlightForm(){
     }
     suggestionForm.classList.add("indicator");
 }
+
+
+//event listeners
 
 menuButton.addEventListener('click', (e)=>{
     e.stopPropagation();

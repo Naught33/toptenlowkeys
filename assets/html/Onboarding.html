@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up/Log in to top 10 lowkeys</title>
+    <link rel="stylesheet" href="../css/onboarding.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="shortcut icon" href="../images/play_logo.jpg" type="image/x-icon">
+    <script src="../javascript/onboarding.js" defer type="module"></script>
+</head>
+<body>
+    <div class="container">
+        <p class="switcher" >Already have an account?
+            <span id="switchToLogIn">
+                Log In.
+            </span>
+        </p>
+        <div id="options" class="prompt">
+            <h1>Would you like to sign up as</h1>
+            <div class="options">
+                <div class="artistprompt ip">
+                    <img src="../icons/beat-box.png" alt="artist icon">
+                    <h2>Artist</h2>
+                </div>
+                <div class="fanprompt ip">
+                    <img src="../icons/fans.png" alt="fan icon">
+                    <h2>Fan</h2>
+                </div>
+            </div>
+        </div>
+
+        <div id="login" class="login">
+            <h1>Log In</h1>
+            <div class="inputgroup">
+                <label for="emaillogin">Email:</label>
+                <input id="emaillogin" type="email">
+            </div>
+
+            <div class="inputgroup">
+                <label for="passlogin">Password:</label>
+                <input id="passlogin" type="password">
+            </div>
+
+            <div class="inputgroup">
+                <label for="accounttype">Account Type:</label>
+                <select id="accounttype">
+                    <option value="fan">Fan</option>
+                    <option value="artist">Artist</option>
+                </select>
+            </div>
+
+            <p class="message" id="messageLogin">Message</p>
+
+            <div class="btngroup">
+                <button id="loginbtn" class="btn">Log In</button>
+                <button id="logingoogle" class="btn">Continue with Google</button>
+            </div>
+        </div>
+
+        <div id="signup" class="signup">
+            <h1>Sign Up</h1>
+            <!-- sign up for fans -->
+            <div class="fan">
+                <div class="inputgroup">
+                    <label for="username">Create Username:</label>
+                    <input id="username" type="text">
+                </div>
+
+                <div class="inputgroup">
+                    <label for="password">Create Password:</label>
+                    <input id="password" type="password">
+                </div>
+
+                <div class="inputgroup">
+                    <label for="passwordconfirm">Confirm Password:</label>
+                    <input id="passwordconfirm" type="password">
+                </div>
+
+                <div class="inputgroup">
+                    <label for="email">Email:</label>
+                    <input id="email" type="email">
+                </div>
+
+                <div class="btngroup">
+                    <button id="signupbtn" class="btn">Sign Up</button>
+                    <button id="signupgoogle" class="btn">Google Sign Up</button>
+                </div>
+            </div>
+            <!-- sign up for artists -->
+            <div class="artist">
+                    <div class="inputgroup">
+                        <label for="ausername">Artist Name:</label>
+                        <input id="ausername" type="text">
+                    </div>
+    
+                    <div class="inputgroup">
+                        <label for="apassword">Create Password:</label>
+                        <input id="apassword" type="password">
+                    </div>
+    
+                    <div class="inputgroup">
+                        <label for="apasswordconfirm">Confirm Password:</label>
+                        <input id="apasswordconfirm" type="password">
+                    </div>
+    
+                    <div class="inputgroup">
+                        <label for="aemail">Email:</label>
+                        <input id="aemail" type="email">
+                    </div>
+    
+                    <div class="btngroup">
+                        <button id="signupartist" class="btn">Sign Up</button>
+                        <button id="signupgoogleartist" class="btn">Google Sign Up</button>
+            </div>
+        </div>
+        <p class="message" id="messageSignup">Message</p>
+    </div>
+</body>
+</html>

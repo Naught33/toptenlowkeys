@@ -379,6 +379,82 @@ h2{
     cursor: pointer;
 }
 
+.account{
+    position: fixed;
+    top: 0;
+    right: -300px;
+    opacity: 0;
+    height: 100vh;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.525);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    transition: .6s;
+}
+
+.openAccount{
+    right: 0;
+    opacity: 1;
+}
+
+.bio{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.account h2{
+    color: black;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.bio h3{
+    font-size: .8rem;
+}
+
+.bioinfo{
+    margin-inline-start: 10px;
+}
+
+.bio img{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+.account button{
+    line-height: 0;
+}
+
+.loginactions{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.cold{
+    background: transparent;
+    border: 2px solid white;
+    color: black;
+}
+
+.preferences{
+    margin: 10px;
+}
+
+.preferencebtns{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-block: 10px;
+}
+
+.preferencebtns button{
+    width: 45%;
+}
+
+
 @media screen and (max-width: 600px){
 
     .navbar{  

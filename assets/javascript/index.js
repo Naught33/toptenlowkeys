@@ -20,8 +20,22 @@ const closePlayer = document.getElementById('close-player');
 const controller = document.getElementById('controller');
 const loginPrompt = document.getElementById('loginprompt');
 const closeLoginPrompt = document.getElementById('closeloginprompt');
+
+//useridentity
+const usernameDisplay = document.getElementById('displayname');
+const accountTypeDisplay = document.getElementById('displayaccount');
+const accountMenu = document.getElementById('account');
+const accountButton = document.getElementById('accountIcon');
+const closeAccountBtn = document.getElementById('closeAccount');
+const logoutBtn = document.getElementById('logoutbtn');
+
+//globals
+const redirecturl = "index.html";
+
+
 const body = document.body;
 let toggleTracker = false;
+let accountTracker = false;
 
 
 
@@ -34,6 +48,7 @@ const firebase = new FirebaseImplementation();
 //functions
 
 //function to check if user is signed in on load of the document
+//we will also update the user name and account preferences
 async function checkLogInStatus(){
 
     const resultBody = await firebase.checkSignInStatus();
@@ -43,6 +58,8 @@ async function checkLogInStatus(){
         return;
     }
     console.log(resultBody);
+    usernameDisplay.innerText = resultBody.displayName.split(',')[0];
+    accountTypeDisplay.innerText = resultBody.displayName.split(',')[1];
     return resultBody;
 }
 
@@ -53,12 +70,8 @@ function promptLogInSignUp(){
 
 //the following functions are a set of functions to sign up, log in or log out user
 
-function logIn(){
-    //implement
-}
-
 function logOut(){
-    //implement
+    firebase.signOutUser(redirecturl);
 }
 
 //before we do anything, let us check if a user is signed in and if not, prompt the user to log in.
@@ -156,6 +169,23 @@ function toggleMenu(){
     }
 }
 
+function toggleAccountBar(){
+    if(!accountTracker){
+        accountMenu.classList.add("openAccount");
+        accountTracker = true;
+    }else{
+        accountMenu.classList.remove("openAccount");
+        accountTracker = false;
+    }
+}
+
+function closeAccountBar(){
+    if(accountTracker){
+        accountMenu.classList.remove("openAccount");
+        accountTracker = false;
+    }
+}
+
 function closeMenu(){
     if(toggleTracker){
         sidenav.classList.remove("sidenavOpen");
@@ -199,6 +229,7 @@ sedRequest.addEventListener('click', (e)=>{
 
 body.addEventListener('click', ()=>{
     closeMenu();
+    closeAccountBar();
 });
 
 sidenav.addEventListener("click", (e)=>{
@@ -218,5 +249,22 @@ controller.addEventListener('click',()=>{
 
 closeLoginPrompt.addEventListener('click',()=>{
     loginPrompt.style.display = "none";
+});
+
+accountButton.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    toggleAccountBar();
+});
+
+accountMenu.addEventListener('click',(e)=>{
+    e.stopPropagation();
+});
+
+logoutBtn.addEventListener('click',()=>{
+    logOut();
+});
+
+closeAccountBtn.addEventListener('click',()=>{
+    closeAccountBar();
 });
 

@@ -26,7 +26,6 @@ const accountType = document.getElementById('accounttype');
 const messageLogin = document.getElementById('messageLogin');
 const messageSignup = document.getElementById('messageSignup');
 
-
 //buttons
 
 const signUpbtn = document.getElementById('signupartist');
@@ -92,21 +91,12 @@ function appear(element){
 //this section will handle user sign up and logins, submit
 //credentials to firebase and log them in.
 
-function logInUser(email,pass,account){
+function logInUser(email,pass){
     if(!validateLogIn(email,pass)){
         return;
     }
-
-    if(account === "artist"){
-        console.log('Login artist: To be implemented');
-        return;
-    }
-
-    if(account === "fan"){
-        console.log('Login fan: To be implemented');
-        return;
-    }
     
+    firebase.signInUser(email,pass,redirecturl);
 }
 
 function signUpFan(name,pass,passcon,email,accountType,redirectURL){
@@ -181,7 +171,7 @@ toggleLoginSignUp.addEventListener('click',()=>{
 });
 
 logInbtn.addEventListener('click',()=>{
-    logInUser(loginEmail.value,loginPass.value,accountType.value);
+    logInUser(loginEmail.value,loginPass.value);
 });
 
 signUpbtn.addEventListener('click',()=>{

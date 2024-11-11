@@ -18,6 +18,8 @@ const playerContainer = document.getElementById('player-container');
 const sedRequest = document.getElementById('sendrequest');
 const closePlayer = document.getElementById('close-player');
 const controller = document.getElementById('controller');
+const loginPrompt = document.getElementById('loginprompt');
+const closeLoginPrompt = document.getElementById('closeloginprompt');
 const body = document.body;
 let toggleTracker = false;
 
@@ -32,13 +34,21 @@ const firebase = new FirebaseImplementation();
 //functions
 
 //function to check if user is signed in on load of the document
-function checkLogInStatus(){
-    //implement
+async function checkLogInStatus(){
+
+    const resultBody = await firebase.checkSignInStatus();
+
+    if(resultBody === null){
+        promptLogInSignUp();
+        return;
+    }
+    console.log(resultBody);
+    return resultBody;
 }
 
 //prompt the user to sign up or sign in if not signed in, this function will be called inside the checkLogInStatus();
 function promptLogInSignUp(){
-    //implement
+    loginPrompt.style.display = "flex";
 }
 
 //the following functions are a set of functions to sign up, log in or log out user
@@ -51,14 +61,8 @@ function logOut(){
     //implement
 }
 
-function signUp(){
-    //implement
-}
-
-//lastly in the sign in suite of functions, we will add a validation function for the credentials.
-function validate(){
-    //imlement
-}
+//before we do anything, let us check if a user is signed in and if not, prompt the user to log in.
+await checkLogInStatus();
 
 async function populateArchives(){
 firebase.getVideoURLs().then((urls) => {
@@ -210,5 +214,9 @@ closePlayer.addEventListener('click',(e)=>{
 controller.addEventListener('click',()=>{
     playerContainer.style.display = "flex";
     controller.style.display = "none";
+});
+
+closeLoginPrompt.addEventListener('click',()=>{
+    loginPrompt.style.display = "none";
 });
 

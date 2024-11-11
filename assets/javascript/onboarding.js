@@ -38,6 +38,7 @@ const logInbtnGoogle = document.getElementById('logingoogle');
 
 //globals
 const firebase = new FirebaseImplementation();
+const redirecturl = "../../index.html";
 
 //functions
 //this function will open a sign up dialogue box based on 
@@ -108,20 +109,20 @@ function logInUser(email,pass,account){
     
 }
 
-function signUpFan(name,pass,passcon,email,accountType){
+function signUpFan(name,pass,passcon,email,accountType,redirectURL){
     if(!validateFanSignUp(name,pass,passcon,email)){
         return;
     }
-    console.log("email: "+email+" pass: " + pass);
-    firebase.signUpUserWithEmailandPassword(email,pass,name,accountType);
+    firebase.signUpUserWithEmailandPassword(email,pass,name,accountType,redirectURL);
 }
 
-function signUpArtist(name, pass,passcon,email,accountType){
+function signUpArtist(name, pass,passcon,email,accountType,redirectURL){
     if(!validateArtistSignUp(name,pass,passcon,email)){
         return;
     }
-    firebase.signUpUserWithEmailandPassword(email,pass,name,accountType)
+    firebase.signUpUserWithEmailandPassword(email,pass,name,accountType,redirectURL);
 }
+
 
 //validation
 function validateFanSignUp(name,pass,passcon,email){
@@ -190,7 +191,8 @@ signUpbtn.addEventListener('click',()=>{
         artistPass.value,
         artistPassCon.value,
         artistEmail.value,
-        "artist"
+        "artist",
+        redirecturl
     );
 });
 
@@ -201,6 +203,7 @@ signUpbtnFan.addEventListener('click',()=>{
         fanPass.value,
         fanPassCon.value,
         fanEmail.value,
-        "fan"
+        "fan",
+        redirecturl
     )
 });

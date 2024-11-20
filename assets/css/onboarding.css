@@ -141,3 +141,28 @@ body{
 .message{
     opacity: 0;
 }
+
+@media screen and (max-width: 600px){
+    body{
+        overflow: hidden;
+    }
+
+    .container{
+        height: 70vh;
+        width: 90vw;
+    }
+
+    .options .ip{
+        height: 100px;
+        width: 100px;
+    }
+
+    .container h1{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .switcher{
+        text-wrap: nowrap;
+    }
+}

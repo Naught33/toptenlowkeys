@@ -28,6 +28,12 @@ const accountMenu = document.getElementById('account');
 const accountButton = document.getElementById('accountIcon');
 const closeAccountBtn = document.getElementById('closeAccount');
 const logoutBtn = document.getElementById('logoutbtn');
+const switchPlayerBtn = document.getElementById('switchplayer');
+
+//suggestion section
+const artistName = document.getElementById('artistName');
+const songTitle = document.getElementById('title');
+const youTubeURL = document.getElementById('youtubeURL');
 
 //globals
 const redirecturl = "index.html";
@@ -36,6 +42,8 @@ const redirecturl = "index.html";
 const body = document.body;
 let toggleTracker = false;
 let accountTracker = false;
+
+let userInfo;
 
 
 
@@ -57,10 +65,14 @@ async function checkLogInStatus(){
         promptLogInSignUp();
         return;
     }
-    console.log(resultBody);
-    usernameDisplay.innerText = resultBody.displayName.split(',')[0];
-    accountTypeDisplay.innerText = resultBody.displayName.split(',')[1];
+    // console.log(resultBody);
+    userInfo = resultBody;
     return resultBody;
+}
+
+async function updateDashboard(userInfo){
+    usernameDisplay.innerText = userInfo.displayName.split(',')[0];
+    accountTypeDisplay.innerText = userInfo.displayName.split(',')[1];
 }
 
 //prompt the user to sign up or sign in if not signed in, this function will be called inside the checkLogInStatus();
@@ -76,27 +88,37 @@ function logOut(){
 
 //before we do anything, let us check if a user is signed in and if not, prompt the user to log in.
 await checkLogInStatus();
+await updateDashboard(await checkLogInStatus());
 
 async function populateArchives(){
-firebase.getVideoURLs().then((urls) => {
+firebase.getArchiveVideos().then((videos) => {
     let myIDs = [];
-    urls.forEach((url)=>{
+    videos.forEach((video)=>{
         let card = document.createElement('div');
         card.setAttribute('class','card');
-        card.style.background = `url('https://img.youtube.com/vi/${YouTubeVideoId(url)}/hqdefault.jpg')`;
+        card.innerHTML = `<div class="like-container"><i style="font-size:24px" class="fa">&#xf004;</i> <p>${video.likeCount}</p></div><h4 class="songInfo">${video.ArtistName}-${video.Title}</h4>`;
+        card.style.background = `url('https://img.youtube.com/vi/${YouTubeVideoId(video.youtubeURL)}/hqdefault.jpg')`;
         card.style.backgroundSize = 'cover';
         card.style.backgroundPosition = 'center';
         archives.appendChild(card);
-        myIDs.push(YouTubeVideoId(url));
+        myIDs.push(YouTubeVideoId(video.youtubeURL));
         });
-        console.log(myIDs);
         let archiveChildren = document.querySelectorAll('#archives > .card');
         archiveChildren.forEach((element, index)=>{
-        element.addEventListener('click', ()=>{
+        element.addEventListener('click', (e)=>{
+            if(e.target.className === "fa"){
+                e.stopPropagation();
+                console.log('clicked like at pos: ' + index);
+                let songTitle = element.querySelector(".songInfo").textContent.split("-")[1];
+                let artistName = element.querySelector(".songInfo").textContent.split("-")[0];
+                firebase.likeSong(artistName,songTitle).then((newLikeCount)=>{
+                    element.querySelector(".like-container > p").innerText = newLikeCount;
+                });
+                return;
+            }
             playerContainer.style.display = "block";
             controller.style.display = "none";
             player.setAttribute(`src`,`https://www.youtube.com/embed/${myIDs[index]}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0`);
-            
         });
     });
 });
@@ -224,7 +246,7 @@ hamburger.addEventListener('click', (e)=>{
 
 sedRequest.addEventListener('click', (e)=>{
     e.preventDefault();
-    firebase.sendRequest();
+    firebase.sendRequest(songTitle.value,artistName.value,youTubeURL.value,userInfo.displayName.split(',')[0]);
 })
 
 body.addEventListener('click', ()=>{
@@ -268,3 +290,6 @@ closeAccountBtn.addEventListener('click',()=>{
     closeAccountBar();
 });
 
+switchPlayerBtn.addEventListener('click',()=>{
+    firebase.redirectUser('./musicplayer/localplayer.html');
+});

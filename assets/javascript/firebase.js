@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+import { getDatabase, ref, set, get, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
 import { getAuth, updateProfile, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -97,10 +97,6 @@ class FirebaseImplementation{
       });
     }
 
-    checkAccountType(){
-      //implement
-    }
-
     async checkSignInStatus(){
       const auth = getAuth(app);
       return new Promise((resolve, reject) => {
@@ -119,38 +115,69 @@ class FirebaseImplementation{
     }
 
     
-    sendRequest(){
-        this.name = document.getElementById('artistName').value;
-        this.url = document.getElementById('youtubeURL').value;
-        this.title = document.getElementById('title').value;
+    sendRequest(songTitle, artist, url, username){
         const database = getDatabase();
-        set(ref(database, "suggestions/"+ this.name + " " +this.title), {
-            ArtistName: this.name,
-            youtubeURL: this.url,
-            Title: this.title
+        set(ref(database, "suggestions/"+ artist + " " +songTitle), {
+            ArtistName: artist,
+            youtubeURL: url,
+            Title: songTitle,
+            SuggestedBy: username,
+            likeCount: 0,
             
         });
 
-        console.log(this.name + " " + this.url);
+        // console.log(songTitle,artist,url,username);
     }
     
-      getVideoURLs(){
+      getArchiveVideos(){
         const database = getDatabase();
-  const videoLinksref = ref(database, "suggestions/");
-  return new Promise((resolve, reject) => {
-    onValue(videoLinksref, (snapshot) => {
-      const suggestedURLs = [];
-      snapshot.forEach((childSnapshot) => {
-        const url = childSnapshot.val().youtubeURL;
-        suggestedURLs.push(url);
-      });
-      resolve(suggestedURLs);
-    }, {
-      onlyOnce: false
-    });
-  });
+        const videoLinksref = ref(database, "suggestions/");
+        return new Promise((resolve, reject) => {
+          onValue(videoLinksref, (snapshot) => {
+            const suggestedURLs = [];
+            snapshot.forEach((childSnapshot) => {
+              // console.log(childSnapshot.val());
+              const video = childSnapshot.val();
+              suggestedURLs.push(video);
+            });
+            resolve(suggestedURLs);
+          }, {
+            onlyOnce: false
+          });
+        });
     }
 
+    async likeSong(artistName, songTitle){
+      let credentials = await this.checkSignInStatus();
+      const database = getDatabase();
+      const songRef = ref(database, "suggestions/"+ artistName + " " +songTitle+"/likeCount");
+      const userRef = ref(database, "suggestions/"+ artistName + " " +songTitle+"/likedBy" + credentials.displayName);
+      const snapshot = await get(userRef);
+      let hasLiked = snapshot.exists() && snapshot.val().liked === true;
+      let newLikeCount;
+      
+      if(hasLiked){
+      await runTransaction(songRef,(currentLikeCount)=>{
+        currentLikeCount--;
+        newLikeCount = currentLikeCount;
+        return currentLikeCount;
+      });
+
+      set(userRef, {
+        liked: false
+      });
+      return newLikeCount;
+      }
+      runTransaction(songRef,(currentLikeCount)=>{
+        currentLikeCount++;
+        newLikeCount = currentLikeCount;
+        return currentLikeCount;
+      });
+        set(userRef, {
+          liked: true
+      });
+      return newLikeCount;
+    }
 
     redirectUser(url){
       window.location.href = url;

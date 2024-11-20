@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+
+@media screen and (max-width: 600px){
+  .alert{
+    display: none;   
+   }
+
+   body{
+    background: linear-gradient(315deg,#882de3, #570da1,rgb(79, 39, 45));
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+   }
+
+   .bottomnav{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+   }
+
+   .bottomnav ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #3C096C;
+    height: 4rem;
+    border-radius: 100px;
+    width: 60%;
+   }
+
+   .bottomnav button{
+    background-color: #3C096C;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+     }
+
+   .bottomnav ul li{
+    list-style-type: none;
+    color: white;
+    margin: 5px;
+   }
+
+   .bottomnav ul, .bottomnav button{
+    margin: 20px;
+   }
+
+   .search{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-block: 20px;
+   }
+
+   .search input{
+    border-radius: 100px 0 0 100px;
+    background: none;
+    border: 1px solid white;
+    width: 65%;
+    outline: none;
+   }
+
+   .search button{
+    border-radius: 0 100px 100px 0;
+    border: 1px solid white;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .search input, .search button{
+    height: 3rem;
+   }
+
+   .features{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+   }
+
+   .feature{
+    background-color: #3C096C;
+    margin: 5px;
+    height: 3.5rem;
+    border-radius: 8px;
+    color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+   }
+
+   .feature span{
+    margin: 5px;
+   }
+
+   .player{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3C096C;
+    margin: 20px;
+    color: white;
+    border-radius: 8px;
+   }
+
+   .player h2{
+    font-size: 12px;
+    text-align: center;
+    width: 200px; /* Set a fixed width */
+    display: -webkit-box; /* Use a flexbox-based box model */
+    -webkit-box-orient: vertical; /* Set orientation to vertical */
+    -webkit-line-clamp: 1; /* Limit the text to 3 lines */
+    line-clamp: 1;
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; 
+   }
+
+   .controls{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .player button{
+    border-radius: 50%;
+    border: none;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .main{
+    height: 3rem;
+    width: 3rem;
+   }
+
+   .small{
+    height: 2rem;
+    width: 2rem;
+   }
+
+   .currentlist{
+    overflow-y: scroll;
+    height: 100%;
+   }
+
+   .listcontainer{
+    border-radius: 8px;
+    background-color: #3C096C;
+    position: relative;
+    height: 35vh;
+    margin: 20px;
+    overflow: hidden;
+   }
+
+   .listcontainer input{
+    display: none;
+   }
+   .listcontainer label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9D4EDD;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px; /* Add some margin from the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Use transform for horizontal centering */
+    z-index: 1; 
+    border: 1px solid #b178e0;
+  }
+
+   .file{
+    margin: 5px;
+    display: flex;
+   }
+
+   .icon{
+    height: 50px;
+    width: 50px;
+    border-radius: 4px;
+    margin: 5px;
+    background-color: #9D4EDD;
+   }
+
+   .info{
+    height: 50px;
+    background-color: #9D4EDD;
+    margin: 5px;
+    border-radius: 4px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+   }
+
+   .info h6{
+    font-size: 12px;
+    width: 200px; /* Set a fixed width */
+    display: -webkit-box; /* Use a flexbox-based box model */
+    -webkit-box-orient: vertical; /* Set orientation to vertical */
+    -webkit-line-clamp: 1; /* Limit the text to 3 lines */
+    line-clamp: 1;
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; 
+
+   }
+
+   .info p{
+    font-size: 11px;
+   }
+
+   #pause{
+    display: none;
+   }
+
+   .modal{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    z-index: 99;
+    transition: .2s linear;
+   }
+
+   .modal-open{
+    top: 0;
+    opacity: 1;
+   }
+
+   .modal .navigation{
+    height: 50px;
+    margin: 20px;
+    color: white;
+    background-color: #3C096C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    border-radius: 8px;
+   }
+
+   .modal .navigation>*{
+      margin: 10px;
+   }
+
+   .modal .visualizer{
+    margin: 20px;
+    background-color: #3C096C;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .modal .visualizer img{
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    object-fit: cover;
+   }
+
+   .rotate{
+    animation: rotate 3s linear infinite;
+   }
+
+   @keyframes rotate {
+    0%{
+      rotate: 0deg;
+    }
+    100%{
+      rotate: 360deg;
+    }
+   }
+
+   .modal .controller{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+   }
+
+   #pause-modal{
+    display: none;
+   }
+
+   .all-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+   .all-info h3{
+    text-align: center;
+    margin: 10px;
+   }
+}

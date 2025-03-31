@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="../images/play_logo.jpg">
+    <link rel="stylesheet" href="../css/artistpage.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="module" src="../javascript/artistpage.js" defer></script>
+    <script type="module" src="../javascript/firebase.js" defer></script>
+    <title>Artist Dashboard | Top 10 Lowkeys</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="title">
+            <img src="../images/main_logo.jpg" alt="logo">
+            <div class="intro">
+                <h1>Top 10 Lowkeys</h1>
+                <h3>Artist Dashboard</h3>
+            </div>
+        </div>
+        <div class="navs">
+            <ul>
+                <li id="home-link">Home</li>
+                <li id="dashboard-link" class="active">Dashboard</li>
+                <li id="menu">Menu</li>
+            </ul>
+
+            <button id="accountIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+            </button>
+
+            <li>
+                <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </li>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Artist Profile Section -->
+        <section class="artist-profile">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img id="profile-image" src="../images/default_profile.jpg" alt="Artist Profile">
+                    <button id="change-profile-image" class="edit-button">
+                        <i class="fa fa-camera"></i>
+                    </button>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name">
+                        <h1 id="artist-name">Artist Name</h1>
+                        <button id="edit-name" class="edit-button">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span id="songs-count">0</span>
+                            <p>Songs</p>
+                        </div>
+                        <div class="stat">
+                            <span id="albums-count">0</span>
+                            <p>Albums</p>
+                        </div>
+                        <div class="stat">
+                            <span id="likes-count">0</span>
+                            <p>Likes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bio-section">
+                <div class="section-header">
+                    <h2>Bio</h2>
+                    <button id="edit-bio" class="edit-button">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
+                <p id="artist-bio" class="bio-text">Add your bio here to let fans know about you.</p>
+            </div>
+        </section>
+
+        <!-- Music Management Section -->
+        <section class="music-management">
+            <div class="section-tabs">
+                <button class="tab-button active" data-tab="songs">Songs</button>
+                <button class="tab-button" data-tab="albums">Albums</button>
+                <button class="tab-button" data-tab="claims">Song Claims</button>
+            </div>
+
+            <!-- Songs Tab -->
+            <div id="songs-tab" class="tab-content active">
+                <div class="tab-header">
+                    <h2>Your Songs</h2>
+                    <button id="add-song" class="action-button">
+                        <i class="fa fa-plus"></i> Add Song
+                    </button>
+                </div>
+                <div class="songs-list" id="songs-container">
+                    <!-- Songs will be added here dynamically -->
+                    <div class="empty-state">
+                        <i class="fa fa-music"></i>
+                        <p>You haven't added any songs yet.</p>
+                        <button id="add-first-song" class="action-button">Add Your First Song</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Albums Tab -->
+            <div id="albums-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Your Albums</h2>
+                    <button id="add-album" class="action-button">
+                        <i class="fa fa-plus"></i> Add Album
+                    </button>
+                </div>
+                <div class="albums-grid" id="albums-container">
+                    <!-- Albums will be added here dynamically -->
+                    <div class="empty-state">
+                        <i class="fa fa-disc"></i>
+                        <p>You haven't added any albums yet.</p>
+                        <button id="add-first-album" class="action-button">Add Your First Album</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claims Tab -->
+            <div id="claims-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Claim Your Songs</h2>
+                    <p class="tab-description">These songs have been suggested by users. If any of them are yours, you can claim them.</p>
+                </div>
+                <div class="claims-list" id="claims-container">
+                    <!-- Claims will be added here dynamically -->
+                    <div class="empty-state">
+                        <i class="fa fa-search"></i>
+                        <p>No songs to claim at the moment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Backstory Section -->
+        <section class="backstory-section">
+            <div class="section-header">
+                <h2>Your Backstory</h2>
+                <button id="edit-backstory" class="edit-button">
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </div>
+            <div class="backstory-content">
+                <p id="artist-backstory">Share your journey as an artist here. Tell your fans how you started, what inspires you, and where you're headed.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sidenav Menu -->
+    <div class="sidenav" id="sidenav">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="../../index.html">Main Page</a></li>
+            <li><a href="#" id="profile-link">Your Profile</a></li>
+            <li><a href="#" id="songs-link">Manage Songs</a></li>
+            <li><a href="#" id="albums-link">Manage Albums</a></li>
+        </ul>
+
+        <h2>Help & Support</h2>
+        <ul>
+            <li><a href="#" id="faq-link">FAQ</a></li>
+            <li><a href="#" id="contact-link">Contact Support</a></li>
+        </ul>
+
+        <h2>Contacts</h2>
+        <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">TikTok</a></li>
+        </ul>
+    </div>
+
+    <!-- Account Menu -->
+    <div id="account" class="account">
+        <div class="bio">
+            <img src="../images/main_logo.jpg" alt="profile">
+            <div class="bioinfo">
+                <h2 id="displayname">Artist Name</h2>
+                <h3 id="displayaccount">Artist Account</h3>
+            </div>
+        </div>
+
+        <div class="preferences">
+            <h2>Preferences</h2>
+            <label for="mode">Mode:</label>
+            <select id="mode" name="mode">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+            </select>
+            <div class="preferencebtns">
+                <button id="updatepreferences" class="actionbtn">Update Preferences</button>
+                <button id="view-public-profile" class="actionbtn cold">View Public Profile</button>
+            </div>
+        </div>
+
+        <div class="loginactions">
+            <button id="closeAccount" class="actionbtn">Close</button>
+            <button id="logoutbtn" class="actionbtn cold">Log Out</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Edit Bio Modal -->
+    <div id="edit-bio-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Your Bio</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <textarea id="bio-text" placeholder="Write your bio here..."></textarea>
+                <div class="character-count">
+                    <span id="bio-char-count">0</span>/500 characters
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-bio" class="actionbtn cold">Cancel</button>
+                <button id="save-bio" class="actionbtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Name Modal -->
+    <div id="edit-name-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Your Name</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <label for="artist-name-input">Artist Name</label>
+                <input type="text" id="artist-name-input" placeholder="Your artist name">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-name" class="actionbtn cold">Cancel</button>
+                <button id="save-name" class="actionbtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Backstory Modal -->
+    <div id="edit-backstory-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Your Backstory</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <textarea id="backstory-text" placeholder="Share your journey as an artist..."></textarea>
+                <div class="character-count">
+                    <span id="backstory-char-count">0</span>/1000 characters
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-backstory" class="actionbtn cold">Cancel</button>
+                <button id="save-backstory" class="actionbtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Song Modal -->
+    <div id="add-song-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Song</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="song-title">Song Title</label>
+                    <input type="text" id="song-title" placeholder="Enter song title">
+                </div>
+                <div class="form-group">
+                    <label for="song-album">Album (Optional)</label>
+                    <input type="text" id="song-album" placeholder="Enter album name">
+                </div>
+                <div class="form-group">
+                    <label for="song-year">Release Year</label>
+                    <input type="number" id="song-year" placeholder="YYYY">
+                </div>
+                <div class="form-group">
+                    <label for="song-youtube">YouTube Link</label>
+                    <input type="text" id="song-youtube" placeholder="https://www.youtube.com/watch?v=...">
+                </div>
+                <div class="form-group">
+                    <label for="song-cover">Cover Image (Optional)</label>
+                    <input type="file" id="song-cover" accept="image/*">
+                    <div class="image-preview" id="song-cover-preview"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-song" class="actionbtn cold">Cancel</button>
+                <button id="save-song" class="actionbtn">Add Song</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Album Modal -->
+    <div id="add-album-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Album</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="album-title">Album Title</label>
+                    <input type="text" id="album-title" placeholder="Enter album title">
+                </div>
+                <div class="form-group">
+                    <label for="album-year">Release Year</label>
+                    <input type="number" id="album-year" placeholder="YYYY">
+                </div>
+                <div class="form-group">
+                    <label for="album-description">Description</label>
+                    <textarea id="album-description" placeholder="Write about this album..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="album-cover">Album Cover</label>
+                    <input type="file" id="album-cover" accept="image/*">
+                    <div class="image-preview" id="album-cover-preview"></div>
+                </div>
+                <div class="form-group">
+                    <label>Songs in this Album</label>
+                    <div id="album-songs-list" class="album-songs-list">
+                        <!-- Songs will be added here dynamically -->
+                        <p class="no-songs">You'll be able to add songs after creating the album.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-album" class="actionbtn cold">Cancel</button>
+                <button id="save-album" class="actionbtn">Add Album</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Claim Song Modal -->
+    <div id="claim-song-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Claim This Song</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="claim-song-info">
+                    <h3 id="claim-song-title">Song Title</h3>
+                    <p>To claim this song, please verify that you are the original artist.</p>
+                </div>
+                <div class="form-group">
+                    <label for="claim-verification">Verification Method</label>
+                    <select id="claim-verification">
+                        <option value="youtube">YouTube Account Link</option>
+                        <option value="social">Social Media Verification</option>
+                        <option value="other">Other Proof</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="claim-proof">Verification Link/Details</label>
+                    <input type="text" id="claim-proof" placeholder="Provide verification details">
+                </div>
+                <div class="form-group">
+                    <label for="claim-notes">Additional Notes (Optional)</label>
+                    <textarea id="claim-notes" placeholder="Any additional information..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-claim" class="actionbtn cold">Cancel</button>
+                <button id="submit-claim" class="actionbtn">Submit Claim</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i id="toast-icon" class="fa fa-check-circle"></i>
+            <div class="toast-message" id="toast-message">Action completed successfully!</div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+</body>
+</html>
+

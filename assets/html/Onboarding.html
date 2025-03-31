@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up/Log in to top 10 lowkeys</title>
+    <title>Sign Up/Log in to Top 10 Lowkeys</title>
     <link rel="stylesheet" href="../css/onboarding.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="shortcut icon" href="../images/play_logo.jpg" type="image/x-icon">
@@ -11,13 +11,12 @@
 </head>
 <body>
     <div class="container">
-        <p class="switcher" >Already have an account?
-            <span id="switchToLogIn">
-                Log In.
-            </span>
+        <p class="switcher">Already have an account?
+            <span id="switchToLogIn">Log In</span>
         </p>
+        
         <div id="options" class="prompt">
-            <h1>Would you like to sign up as</h1>
+            <h1>Would you like to sign up <span>as</span></h1>
             <div class="options">
                 <div class="artistprompt ip">
                     <img src="../icons/beat-box.png" alt="artist icon">
@@ -34,12 +33,12 @@
             <h1>Log In</h1>
             <div class="inputgroup">
                 <label for="emaillogin">Email:</label>
-                <input id="emaillogin" type="email">
+                <input id="emaillogin" type="email" placeholder="Enter your email">
             </div>
 
             <div class="inputgroup">
                 <label for="passlogin">Password:</label>
-                <input id="passlogin" type="password">
+                <input id="passlogin" type="password" placeholder="Enter your password">
             </div>
 
             <p class="message" id="messageLogin">Message</p>
@@ -56,22 +55,22 @@
             <div class="fan">
                 <div class="inputgroup">
                     <label for="username">Create Username:</label>
-                    <input id="username" type="text">
+                    <input id="username" type="text" placeholder="Choose a username">
                 </div>
 
                 <div class="inputgroup">
                     <label for="password">Create Password:</label>
-                    <input id="password" type="password">
+                    <input id="password" type="password" placeholder="At least 6 characters">
                 </div>
 
                 <div class="inputgroup">
                     <label for="passwordconfirm">Confirm Password:</label>
-                    <input id="passwordconfirm" type="password">
+                    <input id="passwordconfirm" type="password" placeholder="Re-enter password">
                 </div>
 
                 <div class="inputgroup">
                     <label for="email">Email:</label>
-                    <input id="email" type="email">
+                    <input id="email" type="email" placeholder="Enter your email">
                 </div>
 
                 <div class="btngroup">
@@ -79,34 +78,37 @@
                     <button id="signupgoogle" class="btn">Google Sign Up</button>
                 </div>
             </div>
+            
             <!-- sign up for artists -->
             <div class="artist">
-                    <div class="inputgroup">
-                        <label for="ausername">Artist Name:</label>
-                        <input id="ausername" type="text">
-                    </div>
-    
-                    <div class="inputgroup">
-                        <label for="apassword">Create Password:</label>
-                        <input id="apassword" type="password">
-                    </div>
-    
-                    <div class="inputgroup">
-                        <label for="apasswordconfirm">Confirm Password:</label>
-                        <input id="apasswordconfirm" type="password">
-                    </div>
-    
-                    <div class="inputgroup">
-                        <label for="aemail">Email:</label>
-                        <input id="aemail" type="email">
-                    </div>
-    
-                    <div class="btngroup">
-                        <button id="signupartist" class="btn">Sign Up</button>
-                        <button id="signupgoogleartist" class="btn">Google Sign Up</button>
+                <div class="inputgroup">
+                    <label for="ausername">Artist Name:</label>
+                    <input id="ausername" type="text" placeholder="Your artist name">
+                </div>
+
+                <div class="inputgroup">
+                    <label for="apassword">Create Password:</label>
+                    <input id="apassword" type="password" placeholder="At least 6 characters">
+                </div>
+
+                <div class="inputgroup">
+                    <label for="apasswordconfirm">Confirm Password:</label>
+                    <input id="apasswordconfirm" type="password" placeholder="Re-enter password">
+                </div>
+
+                <div class="inputgroup">
+                    <label for="aemail">Email:</label>
+                    <input id="aemail" type="email" placeholder="Enter your email">
+                </div>
+
+                <div class="btngroup">
+                    <button id="signupartist" class="btn">Sign Up</button>
+                    <button id="signupgoogleartist" class="btn">Google Sign Up</button>
+                </div>
             </div>
+            <p class="message" id="messageSignup">Message</p>
         </div>
-        <p class="message" id="messageSignup">Message</p>
     </div>
 </body>
 </html>
+

@@ -182,6 +182,29 @@ class FirebaseImplementation{
     redirectUser(url){
       window.location.href = url;
     }
+
+    getHottestSongs() {
+      const database = getDatabase();
+      const suggestionsRef = ref(database, "suggestions/");
+      
+      return new Promise((resolve, reject) => {
+        onValue(suggestionsRef, (snapshot) => {
+          const suggestedSongs = [];
+          
+          snapshot.forEach((childSnapshot) => {
+            const song = childSnapshot.val();
+            suggestedSongs.push(song);
+          });
+          
+          // Sort songs by likeCount in descending order (highest first)
+          suggestedSongs.sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
+          
+          resolve(suggestedSongs);
+        }, {
+          onlyOnce: true
+        });
+      });
+    }
     
 
 }

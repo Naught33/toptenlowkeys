@@ -47,11 +47,11 @@ const topten = document.getElementById("topten")
 const toptenPlaceholder = document.querySelector("#topten > .default")
 
 // Global variables to track autoplay functionality
-let currentPlayingSectionId = null; // "featured", "topten", or "archives"
-let currentPlayingIndex = -1;
-let featuredVideoIds = [];
-let hottestVideoIds = [];
-let archiveVideoIds = [];
+let currentPlayingSectionId = null // "featured", "topten", or "archives"
+let currentPlayingIndex = -1
+let featuredVideoIds = []
+let hottestVideoIds = []
+let archiveVideoIds = []
 
 //globals
 const redirecturl = "index.html"
@@ -67,10 +67,10 @@ const playlist = new Youtube()
 const firebase = new FirebaseImplementation()
 
 // Set initial position for controller at the bottom right
-controller.style.right = "20px";
-controller.style.bottom = "20px";
-controller.style.left = "auto";
-controller.style.top = "auto";
+controller.style.right = "20px"
+controller.style.bottom = "20px"
+controller.style.left = "auto"
+controller.style.top = "auto"
 
 //functions
 
@@ -121,123 +121,123 @@ function isValidYoutubeUrl(url) {
 // Function to collect all video IDs when the page loads
 async function collectAllVideoIds() {
   // Get featured/top 10 videos
-  const playlistArray = await playlist.prepareInfo();
-  featuredVideoIds = [];
+  const playlistArray = await playlist.prepareInfo()
+  featuredVideoIds = []
   for (var id in playlistArray) {
-    featuredVideoIds.push(playlistArray[id].videoID);
+    featuredVideoIds.push(playlistArray[id].videoID)
   }
-  
+
   // Get hottest videos
-  const hottestSongs = await firebase.getHottestSongs();
-  hottestVideoIds = hottestSongs.map(song => extractYouTubeVideoId(song.youtubeURL)).filter(id => id);
-  
+  const hottestSongs = await firebase.getHottestSongs()
+  hottestVideoIds = hottestSongs.map((song) => extractYouTubeVideoId(song.youtubeURL)).filter((id) => id)
+
   // Get archive videos
-  const archiveVideos = await firebase.getArchiveVideos();
-  archiveVideoIds = archiveVideos.map(video => extractYouTubeVideoId(video.youtubeURL)).filter(id => id);
-  
+  const archiveVideos = await firebase.getArchiveVideos()
+  archiveVideoIds = archiveVideos.map((video) => extractYouTubeVideoId(video.youtubeURL)).filter((id) => id)
+
   console.log("Collected video IDs for autoplay:", {
     featured: featuredVideoIds.length,
     hottest: hottestVideoIds.length,
-    archives: archiveVideoIds.length
-  });
+    archives: archiveVideoIds.length,
+  })
 }
 
 // Function to play next video based on current position
 function playNextVideo() {
   // If no section is currently playing, default to featured
   if (!currentPlayingSectionId) {
-    currentPlayingSectionId = "featured";
-    currentPlayingIndex = 0;
+    currentPlayingSectionId = "featured"
+    currentPlayingIndex = 0
   } else {
     // Move to next video in current section
-    currentPlayingIndex++;
+    currentPlayingIndex++
   }
-  
-  let videoIdToPlay = null;
-  
+
+  let videoIdToPlay = null
+
   // Check if we need to move to the next section
   if (currentPlayingSectionId === "featured") {
     if (currentPlayingIndex < featuredVideoIds.length) {
-      videoIdToPlay = featuredVideoIds[currentPlayingIndex];
+      videoIdToPlay = featuredVideoIds[currentPlayingIndex]
     } else {
       // Move to hottest section
-      currentPlayingSectionId = "topten";
-      currentPlayingIndex = 0;
+      currentPlayingSectionId = "topten"
+      currentPlayingIndex = 0
       if (hottestVideoIds.length > 0) {
-        videoIdToPlay = hottestVideoIds[currentPlayingIndex];
+        videoIdToPlay = hottestVideoIds[currentPlayingIndex]
       }
     }
   }
-  
+
   if (!videoIdToPlay && currentPlayingSectionId === "topten") {
     if (currentPlayingIndex < hottestVideoIds.length) {
-      videoIdToPlay = hottestVideoIds[currentPlayingIndex];
+      videoIdToPlay = hottestVideoIds[currentPlayingIndex]
     } else {
       // Move to archives section
-      currentPlayingSectionId = "archives";
-      currentPlayingIndex = 0;
+      currentPlayingSectionId = "archives"
+      currentPlayingIndex = 0
       if (archiveVideoIds.length > 0) {
-        videoIdToPlay = archiveVideoIds[currentPlayingIndex];
+        videoIdToPlay = archiveVideoIds[currentPlayingIndex]
       }
     }
   }
-  
+
   if (!videoIdToPlay && currentPlayingSectionId === "archives") {
     if (currentPlayingIndex < archiveVideoIds.length) {
-      videoIdToPlay = archiveVideoIds[currentPlayingIndex];
+      videoIdToPlay = archiveVideoIds[currentPlayingIndex]
     } else {
       // Loop back to featured
-      currentPlayingSectionId = "featured";
-      currentPlayingIndex = 0;
+      currentPlayingSectionId = "featured"
+      currentPlayingIndex = 0
       if (featuredVideoIds.length > 0) {
-        videoIdToPlay = featuredVideoIds[currentPlayingIndex];
+        videoIdToPlay = featuredVideoIds[currentPlayingIndex]
       }
     }
   }
-  
+
   // If we found a video to play, load it
   if (videoIdToPlay) {
-    console.log(`Playing next video from ${currentPlayingSectionId}, index ${currentPlayingIndex}`);
-    playerContainer.style.display = "block";
-    controller.style.display = "none";
+    console.log(`Playing next video from ${currentPlayingSectionId}, index ${currentPlayingIndex}`)
+    playerContainer.style.display = "block"
+    controller.style.display = "none"
     player.setAttribute(
       "src",
-      `https://www.youtube.com/embed/${videoIdToPlay}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`
-    );
+      `https://www.youtube.com/embed/${videoIdToPlay}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`,
+    )
   }
 }
 
 // Set up YouTube iframe API
 function loadYouTubeAPI() {
-  const tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  const firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  const tag = document.createElement("script")
+  tag.src = "https://www.youtube.com/iframe_api"
+  const firstScriptTag = document.getElementsByTagName("script")[0]
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 }
 
 // YouTube API callbacks
-window.onYouTubeIframeAPIReady = function() {
-  console.log("YouTube API ready");
-};
+window.onYouTubeIframeAPIReady = () => {
+  console.log("YouTube API ready")
+}
 
 // Function to listen for video end events
 function setupYouTubePlayerListener() {
   // This listens for messages from the iframe
-  window.addEventListener('message', function(event) {
+  window.addEventListener("message", (event) => {
     // Try to parse the data
-    let data;
+    let data
     try {
-      data = JSON.parse(event.data);
+      data = JSON.parse(event.data)
     } catch (e) {
-      return; // Not a JSON message
+      return // Not a JSON message
     }
-    
+
     // Check if this is from YouTube and if video ended
-    if (data.event === 'onStateChange' && data.info === 0) {
-      console.log("Video ended, playing next");
-      playNextVideo();
+    if (data.event === "onStateChange" && data.info === 0) {
+      console.log("Video ended, playing next")
+      playNextVideo()
     }
-  });
+  })
 }
 
 // Function to display error messages
@@ -291,7 +291,7 @@ async function updateDashboard(userInfo) {
   usernameDisplay.innerText = userInfo.displayName.split(",")[0]
   accountTypeDisplay.innerText = userInfo.displayName.split(",")[1]
 
-  // Check if user is a fan and add artist page navigation button
+  // Check if user is an artist and add dashboard navigation button
   const accountType = userInfo.displayName.split(",")[1]
   const preferencesDiv = document.querySelector(".preferences")
 
@@ -301,12 +301,12 @@ async function updateDashboard(userInfo) {
     existingArtistBtn.remove()
   }
 
-  // If user is a fan, add the artist page navigation button
-  if (accountType && accountType.trim().toLowerCase() === "fan") {
+  // If user is an artist, add the dashboard navigation button
+  if (accountType && accountType.trim().toLowerCase() === "artist") {
     const artistBtn = document.createElement("button")
     artistBtn.id = "artistPageBtn"
     artistBtn.className = "actionbtn"
-    artistBtn.textContent = "Become an Artist"
+    artistBtn.textContent = "Go to Dashboard"
     artistBtn.style.width = "100%"
     artistBtn.style.marginTop = "15px"
 
@@ -395,7 +395,7 @@ async function populateArchives() {
           return
         }
 
-        if (index < myIDs.length) {
+        if (index > 0 && index <= myIDs.length) {
           playerContainer.style.display = "block"
           controller.style.display = "none"
           // Set current playing section and index for autoplay
@@ -403,14 +403,14 @@ async function populateArchives() {
           currentPlayingIndex = index - 1
           player.setAttribute(
             "src",
-            `https://www.youtube.com/embed/${myIDs[index - 1]}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`
+            `https://www.youtube.com/embed/${myIDs[index - 1]}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`,
           )
         }
       })
     })
 
     // Save IDs for autoplay
-    archiveVideoIds = myIDs;
+    archiveVideoIds = myIDs
 
     // Remove placeholder if it exists and we have videos
     if (archivedPlaceholder && videos.length > 0) {
@@ -443,7 +443,7 @@ async function getVideoId() {
     var ids = []
     for (var id in playlistArray) {
       ids.push(
-        `https://www.youtube.com/embed/${playlistArray[id].videoID}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`
+        `https://www.youtube.com/embed/${playlistArray[id].videoID}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`,
       )
     }
     return ids
@@ -468,7 +468,7 @@ async function populateTopTen() {
     for (var video in playlistObject) {
       const card = document.createElement("div")
       card.setAttribute("class", "card")
-      card.innerHTML = `<div class="like-container"><i style="font-size:24px" class="fa">&#xf004;</i> <p>0</p></div><h4>${array[video] || "?"}. ${playlistObject[video].title || "Untitled"}</h4>`
+      card.innerHTML = `<h4>${array[video] || "?"}. ${playlistObject[video].title || "Untitled"}</h4>`
 
       const thumbnail = playlistObject[video].thumbnailUrl
       if (thumbnail) {
@@ -483,7 +483,7 @@ async function populateTopTen() {
     }
 
     // Save IDs for autoplay
-    featuredVideoIds = ids;
+    featuredVideoIds = ids
 
     const featureChildren = document.querySelectorAll("#featured > .card")
     featureChildren.forEach((element, index) => {
@@ -616,7 +616,7 @@ async function populateHottestSongs() {
     })
 
     // Save IDs for autoplay
-    hottestVideoIds = myIDs;
+    hottestVideoIds = myIDs
 
     const hottestChildren = document.querySelectorAll("#topten > .card")
     hottestChildren.forEach((element, index) => {
@@ -647,7 +647,7 @@ async function populateHottestSongs() {
           return
         }
 
-        if (index < myIDs.length) {
+        if (index > 0 && index <= myIDs.length) {
           playerContainer.style.display = "block"
           controller.style.display = "none"
           // Set current playing section and index for autoplay
@@ -655,7 +655,7 @@ async function populateHottestSongs() {
           currentPlayingIndex = index
           player.setAttribute(
             "src",
-            `https://www.youtube.com/embed/${myIDs[index]}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`
+            `https://www.youtube.com/embed/${myIDs[index-1]}?autoplay=1&controls=1&showinfo=0&modestbranding=1&rel=0&enablejsapi=1`,
           )
         }
       })
@@ -673,9 +673,9 @@ async function populateHottestSongs() {
 await populateHottestSongs()
 
 // Initialize YouTube API and set up autoplay
-loadYouTubeAPI();
-setupYouTubePlayerListener();
-await collectAllVideoIds();
+loadYouTubeAPI()
+setupYouTubePlayerListener()
+await collectAllVideoIds()
 
 //event listeners
 
@@ -757,10 +757,10 @@ closePlayer.addEventListener("click", (e) => {
   playerContainer.style.display = "none"
   controller.style.display = "block"
   // Position the controller in the bottom right corner
-  controller.style.right = "20px";
-  controller.style.bottom = "20px";
-  controller.style.left = "auto";
-  controller.style.top = "auto";
+  controller.style.right = "20px"
+  controller.style.bottom = "20px"
+  controller.style.left = "auto"
+  controller.style.top = "auto"
 })
 
 controller.addEventListener("click", () => {
@@ -891,3 +891,8 @@ function makeDraggable(element) {
 // Make both player and controller draggable
 makeDraggable(playerElement)
 makeDraggable(controllerElement)
+
+
+
+
+//unorganized section

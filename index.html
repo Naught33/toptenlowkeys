@@ -48,32 +48,63 @@
             often heard from, lets give them a chance!
         </p>
     </div>
-    <h2>This Week's Top Ten</h2>
-        <div class="featured">
-            <div class="feature-container" id="featured">
-                <div class="card default" id="default-featured">
-                    <h4>Oops! No videos yet...</h4>
-                </div>
-                </div>
+    
+    <!-- Dropdown menu replacing the "This Week's Top Ten" heading -->
+    <div class="top-section-header">
+        <div class="dropdown">
+            <button class="dropdown-btn">This Week's Top Ten</button>
+            <div class="dropdown-content">
+                <a href="#" id="weeklyToggle" class="active">This Week's Top 10</a>
+                <a href="#" id="hourlyToggle">Hourly Top 5</a>
+                <a href="#" id="dailyToggle">Daily Top 5</a>
             </div>
         </div>
-        <h2>Hottest</h2>
-        <div class="thisweek">
-            <div class="topten" id="topten">
-                <div class="default card">
-                    <h4>Oops! No videos yet...</h4>
-                </div>
+    </div>
+    
+    <!-- Weekly Top 10 (Original) -->
+    <div class="featured" id="weeklySection">
+        <div class="feature-container" id="featured">
+            <div class="card default" id="default-featured">
+                <h4>Oops! No videos yet...</h4>
             </div>
         </div>
-        <h2>Archives</h2>
-        <div class="archived">
-
-            <div class="archives" id="archives">
-                <div class="default card" id="default-archives">
-                    <h4>Oops! No videos yet...</h4>
-                </div>
+    </div>
+    
+    <!-- Hourly Top 5 (New) -->
+    <div class="featured" id="hourlySection" style="display: none;">
+        <div class="feature-container" id="hourlyFeatured">
+            <div class="card default">
+                <h4>Oops! No hourly videos yet...</h4>
             </div>
         </div>
+    </div>
+    
+    <!-- Daily Top 5 (New) -->
+    <div class="featured" id="dailySection" style="display: none;">
+        <div class="feature-container" id="dailyFeatured">
+            <div class="card default">
+                <h4>Oops! No daily videos yet...</h4>
+            </div>
+        </div>
+    </div>
+        
+    <h2>Hottest</h2>
+    <div class="thisweek">
+        <div class="topten" id="topten">
+            <div class="default card">
+                <h4>Oops! No videos yet...</h4>
+            </div>
+        </div>
+    </div>
+        
+    <h2>Archives</h2>
+    <div class="archived">
+        <div class="archives" id="archives">
+            <div class="default card" id="default-archives">
+                <h4>Oops! No videos yet...</h4>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="sidenav" id="sidenav">

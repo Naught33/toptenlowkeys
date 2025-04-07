@@ -1099,3 +1099,149 @@ button {
   }
 }
 
+/* Song Item Styling */
+.song-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.song-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Fix for the song cover image */
+.song-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+.song-info {
+  flex: 1;
+  overflow: hidden; /* Prevent text overflow */
+}
+
+.song-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-details {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.song-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0; /* Prevent the buttons from shrinking */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 480px) {
+  .song-item {
+    flex-wrap: wrap;
+  }
+
+  .song-cover {
+    width: 50px;
+    height: 50px;
+  }
+
+  .song-actions {
+    margin-left: auto;
+  }
+}
+
+/* Claim Item Styling */
+.claim-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+}
+
+.claim-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Fix for the claim cover image */
+.claim-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+.claim-info {
+  flex: 1;
+  overflow: hidden; /* Prevent text overflow */
+}
+
+.claim-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.claim-details {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.claim-details p {
+  margin: 2px 0;
+}
+
+.claim-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0; /* Prevent the buttons from shrinking */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 480px) {
+  .claim-item {
+    flex-wrap: wrap;
+  }
+
+  .claim-cover {
+    width: 50px;
+    height: 50px;
+  }
+
+  .claim-actions {
+    flex-direction: row;
+    margin-left: auto;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+
+

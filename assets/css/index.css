@@ -839,3 +839,153 @@ h2:hover::after {
   }
 }
 
+/* Improved spacing for the right-hand menu */
+.account {
+  padding: 25px;
+}
+
+.preferences {
+  margin: 25px 0;
+  padding: 20px;
+}
+
+.preferences h2 {
+  margin-bottom: 20px;
+}
+
+.preferences label {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.preferences select {
+  margin-bottom: 20px;
+  padding: 12px;
+}
+
+.preferencebtns {
+  margin-top: 20px;
+}
+
+.preferencebtns button {
+  padding: 12px 0;
+}
+
+.loginactions {
+  margin: 30px 0;
+}
+
+.loginactions button {
+  padding: 12px 15px;
+}
+
+#artistPageBtn {
+  margin-top: 20px !important;
+  padding: 12px;
+  font-weight: 500;
+  background: #e94560;
+  transition: all 0.3s ease;
+}
+
+#artistPageBtn:hover {
+  background: #d63553;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(233, 69, 96, 0.3);
+}
+
+/* Dropdown Styles */
+.top-section-header {
+  margin: 20px 12px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: transparent;
+  color: white;
+  padding: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 40px;
+  height: 3px;
+  background-color: #e94560;
+  transition: width 0.3s ease;
+}
+
+.dropdown-btn:hover::after {
+  width: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: rgba(15, 23, 42, 0.95);
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background: rgba(233, 69, 96, 0.2);
+  padding-left: 20px;
+}
+
+.dropdown-content a.active {
+  background: rgba(233, 69, 96, 0.8);
+  font-weight: 500;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 600px) {
+  .dropdown-btn {
+    font-size: 1.5rem;
+  }
+  
+  .dropdown-content {
+    min-width: 180px;
+  }
+}

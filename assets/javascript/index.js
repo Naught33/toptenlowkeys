@@ -312,7 +312,7 @@ async function updateDashboard(userInfo) {
 
     // Add event listener to navigate to artist page
     artistBtn.addEventListener("click", () => {
-      window.location.href = "/assets/html/artistpage.html"
+      window.location.href = "/front/assets/html/artistpage.html"
     })
 
     // Add the button after the preference buttons
